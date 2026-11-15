@@ -246,7 +246,7 @@ The tube also has a lock pin and release lever, but this build doesn't use them 
 4. **Remove the contact block** and free the **contact springs** from it. These are the parts that touch the lens pads, and they get soldered onto the flat-flex PCB later.
 5. Keep all the screws. The bayonet ring goes back together on the printed adapter plate using the same screws and hole pattern. The lock pin and release lever can be set aside.
 
-The adapter plate copies the hole pattern and clocking of the Meike mount face (measured from a 2000 dpi scan), so the harvested ring and screws drop straight in.
+The adapter plate copies the hole pattern and clocking of the Meike mount face, so the harvested ring and screws drop straight in.
 
 ### Why there is no lock pin
 
@@ -270,18 +270,18 @@ There are two printed parts: the **adapter plate** and the **cover**. STEP files
 
 Print the adapter plate with the mount face flat on the bed for the best flatness. Use a hardened nozzle for CF filaments. Check the back focus after printing; small changes in the plate's thickness show up directly as focus error at infinity.
 
-## Lens contacts: the weakest part of the design
+## Lens contacts:
 
 **The electrical contacts to the lens are the most fragile part of this build.**
 
-The E-mount has a short 18 mm flange distance, and the Chronos sensor sits deep enough that, to get the back focus right, **there is only about 2 mm of space between the lens and the Chronos body.** That 2 mm has to hold the adapter plate's mount face, the flat-flex PCB, and the contact springs. There is no room for an off-the-shelf pogo-pin block or for the extension tube's original contact housing.
+The E-mount has a short 18 mm flange distance, and the Chronos sensor sits deep enough that, to get the back focus right, **there is only about a few mm of space between the lens and the Chronos body.** That few mm has to hold the adapter plate's mount face, the flat-flex PCB, and the contact springs. There is no room for an off-the-shelf pogo-pin block or for the extension tube's original contact housing.
 
 The solution was a thin **flat-flex PCB** (`EMountIface`) with the harvested Meike contact springs soldered straight onto it. This is a hand-fitting job:
 
 1. **Solder the springs** onto the pads of the flat-flex PCB, one per E-mount contact.
 2. **UV-cure glue** the flex and springs into the slot in the adapter plate so that the springs stand in the correct positions behind the contact window.
 3. **Cut the springs short** so they reach just past the mount face. They should touch the lens pads without stopping the lens from rotating into the bayonet.
-4. **Bend** each spring so it will press on its pad once a lens is locked in.
+4. **Bend** each spring so it will press on the center of its pad once a lens is locked in.
 5. **Mount the spare Meike tube as if it were a lens.** Its rear (male) end has the same gold contact pads in the same positions as a real lens, and those pads are wired straight through to the contact springs on its front (female) end.
 6. **Check each contact with a continuity tester**, from the spring on the front of the spare tube to the matching pin on the 10-pin header. Because the tube's pads sit exactly where a lens's would, a good reading proves that each spring is touching the *right* pad with real pressure, not just touching something. Also check that no pin is shorted to its neighbours.
 7. Remove the tube, re-bend any spring that failed, and repeat until every contact passes.
@@ -309,11 +309,12 @@ Using the spare tube instead of a real lens means you're not probing, or scratch
 - **OSS (image stabilisation) and power-zoom** are not controllable. No OSS on/off or zoom command has been found in any public protocol source. The OSS button toggles a placeholder (`OSS_FIELD = None`) until the field is found.
 - **Lens power switch rework.** On the current control board, R11 must be removed so that Q3 (lens motor power) can actually turn off. GP7 then connects straight to a gate that R10 pulls up to 5 V, which is outside the RP2040's rating. A planned fix replaces R16 with a BAT54 Schottky diode (cathode to GP7). The firmware never drives GP7 high, and must not.
 - **No external pull-up on `L_TO_B_RXD`.** The firmware uses the RP2040's internal pull-up. A 10–47 kΩ external pull-up is recommended on the next board revision.
-- The VD pulse width (400 µs) is a working value. It is not confirmed against a real body.
 - Four lenses have been tested so far (see [Tested lenses](#tested-lenses)). Others should work but are unconfirmed.
 
 ---
 
 *Not affiliated with Sony, Kron Technologies or Meike. E-mount is a trademark of Sony Corporation.*
+
 *Huge Thanks To LexOptical, without the e mount traffic samples and reverse engineering repos, this would not have been possible*
+
 *mechanical and electrical design beyond the e mount itself is my own, Firmware and docs were made with heavy assistance from Claude*
