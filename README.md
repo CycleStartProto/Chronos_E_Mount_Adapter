@@ -315,3 +315,5 @@ Using the spare tube instead of a real lens means you're not probing, or scratch
 ---
 
 *Not affiliated with Sony, Kron Technologies or Meike. E-mount is a trademark of Sony Corporation.*
+*Huge Thanks To LexOptical, without the e mount traffic samples and reverse engineering repos, this would not have been possible*
+*mechanical and electrical design beyond the e mount itself is my own, Firmware and docs were made with heavy assistance from Claude*
