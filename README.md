@@ -49,7 +49,13 @@ The adapter bolts to the front of the Chronos body and gives it a working female
 
 ## What's needed to build
 
-This is a personal project, not a product, so there is no kit. Everything you need to build one is in this repo apart from a few bought parts. The adapter is **two 3D-printed parts and two PCBs**, plus parts harvested from a Meike E-mount extension tube set.
+This is a personal project, and not intended to be a product. 
+
+Everything needed to build one is in this repo apart from a few bought parts and tools.
+
+The adapter consists **two 3D-printed parts and two PCBs**, plus parts harvested from a Meike E-mount extension tube set.
+
+it is a fairly simple build, but does require a 3d printer, some high precision soldering, and handling of very tiny parts.
 
 | Part | Type | Description |
 |---|---|---|
@@ -66,9 +72,9 @@ This is a personal project, not a product, so there is no kit. Everything you ne
 
 The flat flex and the control board each have a matching row of ten 2.54 mm through-hole pads (Würth 61301011121 footprint). They are joined with a short piece of **1×10 straight pin header**:
 
-1. Solder the pin header into the control board.
-2. Slide the flat-flex tail over the pins so that pin 1 lines up on both boards.
-3. Solder the flex to the pins, and trim off the excess pin length.
+1. Solder the pin header into the flat flex pcb.
+2. Slide the flat-flex tail over the main control board so that pin 1 lines up on both boards.
+3. Solder the the pins to the main control board, and trim off the excess pin length.
 
 This makes a permanent, low-profile joint. To take the adapter apart later you'll need to desolder it, so finish the contact setup (see [Lens contacts](#lens-contacts-the-weakest-part-of-the-design)) before you solder it in for good.
 
@@ -91,7 +97,7 @@ Both boards were made by **[JLCPCB](https://jlcpcb.com)** from the design files 
 
 Upload `hardware/pcbs/control_board_CAM_Output.zip` (the Gerbers and drill file exported from Fusion Electronics) to JLCPCB's PCB quote page.
 
-- **PCB thickness: 1.0 mm.** This is the only setting to change. Everything else (2-layer FR-4, finish, colour and so on) stays at JLCPCB's defaults.
+- **PCB thickness: 1.0 mm.** This is the only setting to change. Everything else (2-layer FR-4, finish, colour and so on) can stay at JLCPCB's defaults, it would look better as black solder mask, but I wasn't going to wait the extra 2 days.
 - **Assembly: turn on PCB Assembly** and export a BOM and pick-and-place (CPL) file from `control_board.sch` / `control board.brd` for it. The RP2040 (QFN-56) and the other fine-pitch parts are much easier to have assembled than to solder by hand.
 - **Standard vs Economic assembly:** as designed, the board has to go through JLCPCB's **Standard** assembly service, because the LIS3DH accelerometer can't be placed on the Economic line. The firmware doesn't use the accelerometer, so if you mark it as **do not populate** (remove it from the BOM/CPL), you can choose the cheaper **Economic** service instead.
 - Hand-solder the through-hole headers (flat flex and OLED) after the boards arrive.
